@@ -1,0 +1,17 @@
+
+<div class="container" *ngIf="type == 'image' "> 
+    <div class="popup-image">
+        <div><span (click)="onClose()">&times;</span></div>       
+        <img src={{url}}  />
+    </div>
+</div>
+<div class="container" *ngIf="type == 'video' "> 
+    <div class="popup-image" width="320" height="240">
+        <div><span (click)="onClose()">&times;</span></div> 
+        <video controls >
+            <source src={{url}} type="video/mp4">
+            
+            Your browser does not support the video tag.
+          </video>
+    </div>
+</div>

@@ -13,7 +13,13 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AuthModule } from './@auth/auth.module';
+import { FileUploadModule } from "primeng/fileupload";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {MatDatepickerModule} from '@angular/material/datepicker'; 
+import { MatFormFieldModule } from '@angular/material/form-field';
+// import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
+import { NbActionsModule } from '@nebular/theme';
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -22,16 +28,26 @@ import {
   NbSidebarModule,
   NbToastrModule,
   NbWindowModule,
+
 } from '@nebular/theme';
 
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+  
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-
+    FileUploadModule,
+    NgbModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    NbActionsModule,
+    // MomentDateAdapter,
     AuthModule.forRoot(),
 
     NbSidebarModule.forRoot(),

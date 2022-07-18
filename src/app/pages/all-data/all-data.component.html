@@ -1,0 +1,113 @@
+<nb-card status="primary">
+  <nb-card-header >
+    <div class="row">
+      <div class="col-md-4">
+        <div style="font-size: 160%;font-family:'Arima',sans-serif;">Details</div>
+      </div>
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4" style="float:right;">
+        <!-- *ngIf="role!='admin'" -->
+        <i class="fa ion-plus-round" style="float:right;" status="info" nbPopover="Program Duration"
+          nbPopoverMode="hover" (click)="addDetails('','add')"></i><br>
+        
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <mat-form-field class="example-full-width">
+      <input matInput type="text" [value]="filterText" [placeholder]="filterPlaceholder" [formControl]="filterInput"/>
+      <button mat-button *ngIf="filterText" matSuffix mat-icon-button aria-label="Clear" (click)="filterText=''">
+        <mat-icon>X</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    <div class="wrapper">
+      <h5><b>Filtered Data count: {{allData?.length}}</b></h5><br/><br/>
+      <div class="Rtable Rtable--5cols Rtable--collapse">
+        <div class="Rtable-row Rtable-row--head">
+          <div class="Rtable-cell date-cell column-heading">Sr. No.</div>
+          <div class="Rtable-cell topic-cell column-heading">Name</div>
+          <div class="Rtable-cell date-cell column-heading">About Me</div>
+          <div class="Rtable-cell date-cell column-heading">Institution</div>
+          <div class="Rtable-cell date-cell column-heading">University</div>
+          <div class="Rtable-cell date-cell column-heading">Year</div>
+          <div class="Rtable-cell date-cell column-heading">program Name</div>
+          <div class="Rtable-cell date-cell column-heading">Image</div>
+          <div class="Rtable-cell date-cell column-heading">Video</div>
+          <div class="Rtable-cell date-cell column-heading">Stream</div>
+          <div class="Rtable-cell date-cell column-heading">Location</div>
+          <div class="Rtable-cell date-cell column-heading">Action</div>
+        </div>
+
+
+        <div class="Rtable-row is-striped" *ngFor="let data of allData |filter:{name:filterText,aboutMe:filterText,institution:filterText,university:filterText,year:filterText,program:filterText,stream:filterText,location:filterText} |paginate: { itemsPerPage: 10, currentPage: page }  ;let i=index; ">
+
+          <div class="Rtable-cell date-cell">
+            <div class="Rtable-cell--heading">Sr. No.</div>
+            <div class="Rtable-cell--content date-content"> {{i+1}}</div>
+
+          </div>
+          <div class="Rtable-cell topic-cell">
+            <div class="Rtable-cell--heading">Name</div>
+            <div class="Rtable-cell--content date-content">{{data.name}}</div>
+          </div>
+          <div class="Rtable-cell date-cell">
+            <div class="Rtable-cell--heading">About Me</div>
+            <div class="Rtable-cell--content date-content">{{data.aboutMe}}</div>
+          </div>
+          <div class="Rtable-cell date-cell">
+            <div class="Rtable-cell--heading">Institution</div>
+            <div class="Rtable-cell--content date-content">{{data.institution}}</div>
+          </div>
+          <div class="Rtable-cell date-cell">
+            <div class="Rtable-cell--heading">University</div>
+            <div class="Rtable-cell--content date-content">{{data.university}}</div>
+          </div>
+          <div class="Rtable-cell date-cell">
+            <div class="Rtable-cell--heading">Year</div>
+            <div class="Rtable-cell--content date-content">{{data.year}}</div>
+          </div>
+          <div class="Rtable-cell date-cell">
+            <div class="Rtable-cell--heading">program Name</div>
+            <div class="Rtable-cell--content date-content">{{data.program}}</div>
+          </div>
+          <div class="Rtable-cell date-cell">
+            <div class="Rtable-cell--heading">Image</div>
+            <div class="Rtable-cell--content date-content"><img src="{{imageDirectoryPath}}{{data.id}}/image/{{data.image}}" (click)="onView(data.image,imageDirectoryPath,data.id,'image')" height='100px' width='100%'/></div>
+          </div>
+          <div class="Rtable-cell date-cell">
+            <div class="Rtable-cell--heading">Image</div>
+            <div class="Rtable-cell--content date-content">
+              <video width="100%" height="100" (click)="onView(data.video,videoDirectoryPath,data.id,'video')">
+                <source src="{{videoDirectoryPath}}{{data.id}}/video/{{data.video}}" type="video/mp4">
+                
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          <div class="Rtable-cell date-cell">
+            <div class="Rtable-cell--heading">Stream</div>
+            <div class="Rtable-cell--content date-content">{{data.stream}}</div>
+          </div>
+          <div class="Rtable-cell date-cell">
+            <div class="Rtable-cell--heading">Location</div>
+            <div class="Rtable-cell--content date-content">{{data.location}}</div>
+          </div>
+          <div class="Rtable-cell date-cell">
+            <div class="Rtable-cell--heading">Action</div>
+            <div class="Rtable-cell--content date-content">
+              <i class="fa ion-edit" status="info" nbPopover="Data edit" nbPopoverMode="hover" (click)="addDetails(data?.id,'edit')"></i><br>
+              <i class="fa ion-android-delete" status="info" nbPopover="delete" nbPopoverMode="hover" (click)="deleteDetail(data?.id)"></i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div *ngIf="allData?.length == 0">
+        <span style="color : red; font-size: 18px;">No Data Available</span>
+      </div>
+    </div>
+    <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
+  </nb-card-body>
+</nb-card>

@@ -20,5 +20,6 @@
     "plugins": [
       { "name": "typescript-tslint-plugin"}
     ]
-  }
+  },
+
 }

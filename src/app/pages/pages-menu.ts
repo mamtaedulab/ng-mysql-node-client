@@ -34,6 +34,24 @@ export class PagesMenu {
         group: true,
       },
       {
+        title:'Demo Component',
+        link: '/pages/extra-component',
+      },
+      {
+        title:'Demo Form',
+        link: '/pages/MyForm',
+      },
+      {
+        title:'AllData ',
+        link: '/pages/alldata',
+      },
+      {
+        title:'Blogs',
+        icon:'blogs-outline',
+        link:'/pages/blogs'
+      },
+
+      {
         title: 'Layout',
         icon: 'layout-outline',
         children: [
@@ -261,6 +279,7 @@ export class PagesMenu {
           },
         ],
       },
+      
     ];
 
     return of([...dashboardMenu, ...menu]);

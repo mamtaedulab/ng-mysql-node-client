@@ -1,0 +1,84 @@
+<nb-card status="primary">
+    <nb-card-header>
+        <div class="row">
+            <div class="col-md-4">
+                <div style="font-size: 160%;">List of all blogs</div>
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4" style="float:right;">
+                <i class="fa ion-plus-round" style="float:right;" status="info" nbPopover="Blog "
+                    nbPopoverMode="hover" (click)="addDetails('','add')"></i><br>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <mat-form-field class="example-full-width">
+            <input matInput type="text" [value]="filterText" [placeholder]="filterPlaceholder" [formControl]="filterInput" />
+            <button mat-button *ngIf="filterText" matSuffix mat-icon-button aria-label="Clear" (click)="filterText=''">
+                <mat-icon>X</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+        <div class="wrapper" >
+            <h5><b>Filtered Data count: {{allBlogs?.length}}</b></h5><br /><br />
+            
+            <div class="Rtable Rtable--5cols Rtable--collapse" >
+                <div class="Rtable-row Rtable-row--head">
+                    <div class="Rtable-cell date-cell column-heading">Sr.No.</div>
+                    <div class="Rtable-cell topic-cell column-heading">Title</div>
+                    <div class="Rtable-cell date-cell column-heading">Date of Publishing</div>
+                    <div class="Rtable-cell date-cell column-heading">Author Name</div>
+                    <div class="Rtable-cell date-cell column-heading">Approx. reading time</div>
+                    <div class="Rtable-cell date-cell column-heading">Summary</div>
+                    <div class="Rtable-cell date-cell column-heading">Image & Icon</div>
+                    <div class="Rtable-cell date-cell column-heading">Action</div>
+                </div>
+                <div class="Rtable-row is-striped"  *ngFor="let data of allBlogs |filter:{title:filterText,date_of_publishing:filterText,author_name:filterText,reading_time:filterText,summary:filterText}|paginate: { itemsPerPage: 10, currentPage: page }  ;let i=index; ">
+
+                    <div class="Rtable-cell date-cell">
+                        <div class="Rtable-cell--heading">Sr. No.</div>
+                        <div class="Rtable-cell--content date-content">{{i+1}}</div>
+                    </div>
+                    <div class="Rtable-cell topic-cell">
+                        <div class="Rtable-cell--heading">Title</div>
+                        <div class="Rtable-cell--content date-content">{{data.title}}</div>
+                    </div>
+                    <div class="Rtable-cell date-cell">
+                        <div class="Rtable-cell--heading">Date of Publishing</div>
+                        <div class="Rtable-cell--content date-content">{{data.date_of_publishing}}</div>
+                    </div>
+                    <div class="Rtable-cell date-cell">
+                        <div class="Rtable-cell--heading">Author Name</div>
+                        <div class="Rtable-cell--content date-content">{{data.author_name}}</div>
+                    </div>
+                    <div class="Rtable-cell date-cell">
+                        <div class="Rtable-cell--heading">Approx. reading time</div>
+                        <div class="Rtable-cell--content date-content">{{data.reading_time}}</div>
+                    </div>
+                    <div class="Rtable-cell date-cell">
+                        <div class="Rtable-cell--heading">Summary</div>
+                        <div class="Rtable-cell--content date-content">{{data.summary}}</div>
+                    </div>
+
+                    <div class="Rtable-cell date-cell">
+                        <div class="Rtable-cell--heading">Image & Icon</div>
+                        <div class="Rtable-cell--content date-content"><img src="{{imageDirectoryPath}}{{data.id}}/{{data.image}}" (click)="onView(data.image,imageDirectoryPath,data.id,'image')" height='100px' width='100%' /></div>
+                    </div>
+                    <div class="Rtable-cell date-cell">
+                        <div class="Rtable-cell--heading">Action</div>
+                        <div class="Rtable-cell--content date-content">
+                            <i class="fa ion-edit" status="info" (click)="addDetails(data.id,'edit')" nbPopover="Data edit" nbPopoverMode="hover"></i><br>
+                            <i class="fa ion-android-delete" status="info" (click)="deleteDetail(data.id)" nbPopover="delete" nbPopoverMode="hover"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="allBlogs?.length == 0">
+                <span style="color : red; font-size: 18px;">No Data Available</span>
+            </div>
+        </div>
+        <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
+       
+    </nb-card-body>
+</nb-card>

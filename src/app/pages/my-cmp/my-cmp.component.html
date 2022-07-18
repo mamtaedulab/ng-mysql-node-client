@@ -1,0 +1,120 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card status="primary">
+      <nb-card-header style="font-size: 160%;font-family:'Arima',sans-serif;">Mentor Form</nb-card-header>
+      <nb-card-body>
+        <nb-card class="shadow" style="width:90%;margin-left: auto;margin-right: auto;">
+          <form [formGroup]="MyForm" (ngSubmit)="onSubmit()">
+
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <label for="name">Name:</label>
+                    <input type="text" nbInput fullWidth fieldSize="giant" id="name" formControlName="name">
+
+                  </div>
+                </div>
+                <div class="form-group row diff">
+                  <div class="col-sm-12">
+                    <label for="about">About Me</label>
+                    <input type="text" nbInput fullWidth fieldSize="giant" id="about" formControlName="about">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
+                <label for="photo">Photo</label>
+                <input type="file" nbInput fullWidth fieldSize="giant" id="name" accept="image/*"
+                  (change)=" onSelect($event)">
+              </div>
+              <div class="form-group col-sm-2">
+                <div></div>
+                <img [src]="urlImg" height="100px" width="100%" (click)="onView(urlImg,'image')">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <label for="Institution">Institution</label>
+                    <input type="text" nbInput fullWidth fieldSize="giant" id="Institution"
+                      formControlName="institution">
+                  </div>
+                </div>
+                <div class="form-group row diff">
+                  <div class="col-sm-12">
+                    <label for="Institution">University</label>
+                    <input type="text" nbInput fullWidth fieldSize="giant" id="university" formControlName="university">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
+                <label for="video">Video</label>
+                <input type="file" nbInput fullWidth fieldSize="giant" id="name" accept="video/*"
+                  (change)="onSelectVideo($event)">
+              </div>
+              <div class="form-group col-sm-2">
+                <video height="100px" width="100%" poster="thumbnail/image1.png" (click)="onView(urlVid,'video')">
+                  <source [src]="urlVid" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <label for="photo">Program Name</label>
+                    <nb-select size="giant" fullWidth id="programName" fromControlName="programName"
+                      (change)="changeProgram($event)" placeholder="Select Option">
+                      <nb-option *ngFor="let p of program" [value]="p"><i class="fa fa-graduation-cap"></i>{{p}}</nb-option>
+                    </nb-select>
+                  </div>
+                </div>
+                <div class="form-group row" style="margin-top: 5%;">
+                  <div class="col-sm-12">
+                    <label for="photo">Stream</label>
+                    <input type="text" nbInput fullWidth fieldSize="giant" id="stream" formControlName="stream">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group col-sm-6">
+                <div class="form-group row diff">
+                  <div class="col-sm-4 diff">
+                    <label for="Year">Year of passing</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <mat-form-field appearance="fill" style="width:100%;">
+                      <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="yearOfpassing">
+                      <mat-hint>YYYY</mat-hint>
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker startView="multi-year"
+                        (yearSelected)="_yearSelectedHandler($event,picker)"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="form-group row diff">
+                  <div class="col-sm-12">
+                    <label for="photo">Location</label>
+                    <input type="text" nbInput fullWidth fieldSize="giant" id="name" formControlName="location">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row ">
+              <div class="col-sm-3">
+                <button type="button" nbButton fullWidth status="danger" size="giant" (click)="backtoprograms();">Back</button>
+              </div>
+              <div class="col-sm-3">
+                <button type="submit" nbButton fullWidth status="success" size="giant"
+                  [disabled]="!MyForm.valid">Submit</button>
+              </div>
+            </div>
+          </form>
+        </nb-card>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

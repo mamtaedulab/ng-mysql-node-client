@@ -46,6 +46,7 @@ import { ButtonsComponent } from './buttons/buttons.component';
     FormInputsComponent,
     FormLayoutsComponent,
     DatepickerComponent,
+   
   ],
 })
 export class FormsModule { }

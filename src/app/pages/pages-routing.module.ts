@@ -11,11 +11,37 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
-
+import {ExtraComponentComponent} from './extra-component/extra-component/extra-component.component'
+import {MyCmpComponent} from './my-cmp/my-cmp.component'
+import {AllDataComponent} from './all-data/all-data.component'
+import { IndividualComponent } from './all-data/individual/individual.component';
+import {BlogsComponent} from './blogs/blogs.component'
+import { IndividualBlogComponent } from './blogs/individual-blog/individual-blog.component';
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
+    {
+      path:'MyForm',
+      component:MyCmpComponent ,
+    },
+    {
+      path:'alldata',
+      component:AllDataComponent,
+    },
+    {
+      path:'individual',
+      component:IndividualComponent,
+
+    },
+    {
+    path:'blogs',
+    component:BlogsComponent,
+    },
+    {
+    path:'individual-blog',
+    component:IndividualBlogComponent,
+    },
     {
       path: 'dashboard',
       component: ECommerceComponent,
@@ -50,9 +76,8 @@ const routes: Routes = [{
         .then(m => m.ModalOverlaysModule),
     },
     {
-      path: 'extra-components',
-      loadChildren: () => import('./extra-components/extra-components.module')
-        .then(m => m.ExtraComponentsModule),
+      path: 'extra-component',
+      component: ExtraComponentComponent,
     },
     {
       path: 'maps',

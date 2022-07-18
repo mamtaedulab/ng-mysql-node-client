@@ -1,0 +1,89 @@
+<nb-card status="primary" class="shadow">
+  <nb-card-header>
+    <div class="row">
+      <div class="col-md-12">
+        <div style="font-size: 160%;font-family:'Arima',sans-serif;">Individuals blogs</div>
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <nb-card class="shadow" style="width:80%;margin-left: auto;margin-right: auto;">
+      <form [formGroup]="MyBlog" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="form-group col-sm-6 ">
+            <label for="title">Title</label>
+            <input type="text" nbInput fullWidth fieldSize="giant" formControlName="title"
+              ngModel="{{blogData?.title}}">
+            <!-- <div *ngIf=" title.touched && title.invalid" class="alert alert-danger">Field is required.</div> -->
+          </div>
+          <div class="form-group col-sm-6 ">
+            <label for="authorName">Author Name</label>
+            <input type="text" nbInput fullWidth fieldSize="giant" formControlName="authorName"
+              ngModel="{{blogData?.author_name}}">
+            <!-- <div *ngIf=" author.touched && author.invalid" class="alert alert-danger">Field is required.</div> -->
+          </div>
+
+        </div>
+        <div class="row diff">
+
+          <div class="form-group col-sm-6 ">
+            <label for="formpicker">Date Of Publishing</label>
+            <nb-card>
+              <nb-card-body>
+                <input nbInput fullWidth formControlName="dateOfPublishing" [(ngModel)]="loadDate"
+                  placeholder="Date picker" [nbDatepicker]="formpicker">
+                <nb-datepicker #formpicker></nb-datepicker>
+                <!-- <div *ngIf=" publishDate.touched && publishDate.invalid" class="alert alert-danger">Field is required.
+                </div> -->
+              </nb-card-body>
+            </nb-card>
+          </div>
+
+          <div class="form-group col-sm-6 ">
+            <label for="timepicker">Approximate Reading Time</label>
+            <nb-card>
+              <nb-card-body>
+                <input nbInput fullWidth [nbTimepicker]="timepicker" nbInput fullWidth formControlName="readingTime"
+                  [(ngModel)]="loadTime">
+                <nb-timepicker #timepicker></nb-timepicker>
+              </nb-card-body>
+            </nb-card>
+          </div>
+        </div>
+
+        <div class="row diff">
+          <div class="form-group col-sm-6">
+            <label for="summary">Summary</label>
+            <textarea nbInput fullWidth formControlName="summary" ngModel="{{blogData?.summary}}" rows="6"></textarea>
+            <!-- <div *ngIf=" summary.touched && summary.invalid" class="alert alert-danger">Field is required.</div> -->
+          </div>
+
+          <div class="form-group col-sm-4">
+            <label for="photo">Image & Icon</label>
+            <input type="file" nbInput fullWidth fieldSize="giant" id="photo" accept="image/*"
+              (change)="onSelectImage($event)">
+            <!-- <div *ngIf="msg" class="alert alert-danger">Only Image files (.jpg ,.jpeg ,.png) are allowed.</div> -->
+          </div>
+          <div class="form-group col-sm-2">
+            <label></label>
+            <img [src]="urlImg" height="100px" width="100%" (click)="onView(urlImg,'image')">
+          </div>
+        </div>
+        <div class="row diff">
+          <div class="col-sm-3">
+            <button nbButton fullWidth status="danger" size="giant" type="button"
+              (click)="backtoprograms();">Back</button>
+          </div>
+          <div class="col-sm-3">
+            <button type="submit" nbButton fullWidth status="success" size="giant"
+              [disabled]="!MyBlog.valid">Save</button>
+          </div>
+
+        </div>
+
+      </form>
+    </nb-card>
+  </nb-card-body>
+  <nb-card-footer> </nb-card-footer>
+
+</nb-card>

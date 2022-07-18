@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "dc7c5784-35a2-4ab3-8d30-693af913f28c"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -23,6 +26,7 @@
               "src/favicon.ico",
               "src/favicon.png",
               "src/web.config",
+              "src/thumbnail",
               {
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images",
@@ -30,6 +34,7 @@
               }
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/typeface-exo/index.css",
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
@@ -40,6 +45,7 @@
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
               "node_modules/leaflet/dist/leaflet.css",
               "src/app/@theme/styles/styles.scss"
+             
             ],
             "scripts": [
               "node_modules/pace-js/pace.min.js",
@@ -128,6 +134,7 @@
               "node_modules/chart.js/dist/Chart.min.js"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/typeface-exo/index.css",
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
@@ -137,11 +144,14 @@
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
               "src/app/@theme/styles/styles.scss"
+              
+
             ],
             "assets": [
               "src/assets",
               "src/favicon.ico",
               "src/favicon.png",
+             
               {
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images",

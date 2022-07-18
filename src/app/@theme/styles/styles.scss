@@ -13,6 +13,11 @@
 @import '~@nebular/theme/styles/globals';
 @import '~@nebular/auth/styles/globals';
 
+@import "~primeicons/primeicons.css";
+@import "~primeng/resources/themes/nova/theme.css";
+@import "~primeng/resources/primeng.min.css";
+
+
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
@@ -36,4 +41,8 @@
   @include ngx-pace-theme();
 
   @include nb-overrides();
+
 };
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

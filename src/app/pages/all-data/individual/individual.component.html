@@ -1,0 +1,276 @@
+<div class="row">
+    <div class="col-md-12">
+      <nb-card status="primary">
+        <nb-card-header style="font-size: 160%;font-family:'Arima',sans-serif;">Individual Data</nb-card-header>
+        <nb-card-body>
+          <nb-card class="shadow" style="width:80%;margin-left: auto;margin-right: auto;">
+          <form [formGroup]="MyForm"  (ngSubmit)="onSubmit()">
+
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <label for="name">Name:</label>
+                    <input type="text" nbInput fullWidth fieldSize="giant" id="name" formControlName="name" ngModel="{{singleData?.name}}">
+
+                  </div>
+                </div>
+                <div class="form-group row diff">
+                  <div class="col-sm-12">
+                    <label for="about">About Me</label>
+                    <input type="text" nbInput fullWidth fieldSize="giant" id="about" formControlName="about" ngModel="{{singleData?.aboutMe}}">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
+                <label for="photo">Photo</label>
+                <input type="file" nbInput fullWidth fieldSize="giant" id="name" accept="image/*"
+                (change)="onSelectImage($event)" >
+                
+              </div>
+              <div class="form-group col-sm-2">
+                <div></div>
+                <img [src]="urlImg" height="100px" width="100%" (click)="onView(urlImg,'image')">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <label for="Institution">Institution</label>
+                    <input type="text" nbInput fullWidth fieldSize="giant" id="Institution" ngModel="{{singleData?.institution}}"
+                      formControlName="institution">
+                  </div>
+                </div>
+                <div class="form-group row diff">
+                  <div class="col-sm-12">
+                    <label for="Institution">University</label>
+                    <input type="text" nbInput fullWidth fieldSize="giant" id="university" formControlName="university" ngModel="{{singleData?.university}}">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
+                <label for="video">Video</label>
+                <input type="file" nbInput fullWidth fieldSize="giant" id="name" accept="video/*"
+                (change)="onSelectVideo($event)">
+              </div>
+              <div class="form-group col-sm-2">
+                <video height="100px" width="100%" poster="thumbnail/image1.png" (click)="onView(urlVid,'video')">
+                  <source [src]="urlVid" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+
+            
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <label for="photo">Program Name</label>
+                    <nb-select size="giant" fullWidth id="programName" fromControlName="programName"
+                    (change)="changeCity($event) "  [selected]="selectedProgram" >
+                      <nb-option *ngFor="let p of program"[value]="p">{{p}}</nb-option>
+                    </nb-select>
+                  </div>
+                </div>
+                <div class="form-group row" style="margin-top: 5%;">
+                  <div class="col-sm-12">
+                    <label for="photo">Stream</label>
+                    <input type="text" nbInput fullWidth fieldSize="giant" id="stream" formControlName="stream" ngModel="{{singleData?.stream}}">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group col-sm-6">
+                <div class="form-group row diff">
+                  <div class="col-sm-4 diff">
+                    <label for="Year">Year of passing</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <mat-form-field appearance="fill" style="width:100%;">
+                      <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="yearOfpassing" ngModel="{{singleData?.year}}">
+                      <mat-hint>YYYY</mat-hint>
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker startView="multi-year"
+                        (yearSelected)="_yearSelectedHandler($event,picker)"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="form-group row diff">
+                  <div class="col-sm-12">
+                    <label for="photo">Location</label>
+                    <input type="text" nbInput fullWidth fieldSize="giant" id="name" formControlName="location" ngModel="{{singleData?.location}}">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row ">
+              <div class="col-sm-3">
+                <button type="button" nbButton fullWidth status="danger" size="giant" (click)="backtoprograms();">Back</button>
+              </div>
+              <div class="col-sm-3">
+                <button type="submit" nbButton fullWidth status="success" size="giant"
+                  [disabled]="!MyForm.valid">Update</button>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+            <div class="form-group row">
+              <label for="name" class="col-sm-2 col-sm-offset-1 col-form-label">Name:</label>
+              <div class="col-sm-7">              
+                <input type="text" class="form-control" formControlName="name" ngModel="{{singleData?.name}}"
+                [ngClass]="{ 'is-invalid':(form['name'].touched || form['name'].dirty )&& form['name'].errors }" >
+               <div *ngIf=" form['name'].errors" class="invalid-feedback">
+                    <div *ngIf="form['name'].errors['required']">
+                      Field is required
+                    </div>
+                    <div *ngIf="form['name'].errors['pattern']">
+                      Only Characters are allowed.
+                    </div>
+                </div>
+              </div>
+            </div> -->
+
+            <!-- <div class="form-group row">
+              <label for="photo" class="col-sm-2 col-sm-offset-1 col-form-label">Photo</label>
+              <div class="col-sm-5"> 
+               <input type="file" class="form-control" id="name"  accept="image/*" (change)="onSelectImage($event)" style="height: 30px">
+              </div>
+              <div class="col-sm-2">
+                <img [src]="urlImg" height="100px" width="100px" (click)="onView(urlImg,'image')">
+              </div>
+            </div>  -->
+
+           <!-- <div class="form-group row">
+              <label for="video" class="col-sm-2 col-sm-offset-1 col-form-label">Video</label>
+              <div class="col-sm-5"> 
+                <input type="file" class="form-control" id="name" accept="video/*" (change)="onSelectVideo($event)" style="height: 30px">
+               </div>
+               <div class="col-sm-2">
+                  <video  height="100px" width="100px" (click)="onView(urlVid,'video')" poster="thumbnail/image1.png"  >
+                    <source [src]="urlVid" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+               </div>
+            </div> -->
+            <!-- <div class="form-group row">
+              <label for="about" class=" col-sm-2 col-sm-offset-1 col-form-label" >About Me</label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="about" formControlName="about" ngModel="{{singleData?.aboutMe}}"
+                [ngClass]="{ 'is-invalid':(form['about'].touched || form['about'].dirty )&& form['about'].errors }">
+                <div *ngIf=" form['about'].errors" class="invalid-feedback">
+                  <div *ngIf="form['about'].errors['required']">
+                    Field is required
+                  </div>
+              </div>
+              </div>
+            </div> -->
+            <!-- <div class="form-group row">
+              <label for="Institution" class=" col-sm-2 col-sm-offset-1 col-form-label">Institution</label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="Institution" formControlName="institution" ngModel="{{singleData?.institution}}"
+                [ngClass]="{ 'is-invalid':(form['institution'].touched || form['institution'].dirty )&& form['institution'].errors }">
+                <div *ngIf=" form['institution'].errors" class="invalid-feedback">
+                  <div *ngIf="form['institution'].errors['required']">
+                    Field is required
+                  </div>
+              </div>
+              </div>
+            </div> -->
+            <!-- <div class="form-group row">
+              <label for="Institution" class=" col-sm-2 col-sm-offset-1 col-form-label">University</label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="university" formControlName="university" ngModel="{{singleData?.university}}"
+                [ngClass]="{ 'is-invalid':(form['university'].touched || form['university'].dirty )&& form['university'].errors }">
+                <div *ngIf=" form['university'].errors" class="invalid-feedback">
+                  <div *ngIf="form['university'].errors['required']">
+                    Field is required
+                  </div>
+              </div>
+              </div>
+            </div> -->
+
+            <!-- <div class="form-group row">
+              <label for="Year" class="col-sm-2 col-sm-offset-1 col-form-label">Year of passing</label>
+              <div class="col-sm-7">
+            
+              <mat-form-field appearance="fill" >
+                
+                <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="yearOfpassing" ngModel="{{singleData?.year}}">
+                <mat-hint>YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="multi-year" (yearSelected)="_yearSelectedHandler($event,picker)" panelClass="jp-year-picker"></mat-datepicker>
+              </mat-form-field>
+            <br>
+
+
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="photo" class="col-sm-2 col-sm-offset-1 col-form-label">Program Name</label>
+              <div class="col-sm-7"> 
+                <select class="form-control"  id="programName" fromControlName="programName"  (change)="changeCity($event)" >
+                  <option *ngFor="let p of program" [selected]="p === selectedProgram" [ngValue]="p">{{p}}</option>
+                  
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="photo" class="col-sm-2 col-sm-offset-1 col-form-label">Stream</label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="name" formControlName="stream" ngModel="{{singleData?.stream}}"
+                [ngClass]="{ 'is-invalid':(form['stream'].touched || form['stream'].dirty )&& form['stream'].errors }">
+                <div *ngIf=" form['stream'].errors" class="invalid-feedback">
+                  <div *ngIf="form['stream'].errors['required']">
+                    Field is required
+                  </div>
+              </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="photo" class="col-sm-2 col-sm-offset-1 col-form-label">Location</label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="name" formControlName="location" ngModel="{{singleData?.location}}"
+                [ngClass]="{ 'is-invalid':(form['location'].touched || form['location'].dirty )&& form['location'].errors }">
+                <div *ngIf=" form['location'].errors" class="invalid-feedback">
+                  <div *ngIf="form['location'].errors['required']">
+                    Field is required
+                  </div>
+              </div>
+              </div>
+            </div> -->
+            <!-- <div class="form-group row">
+                <div class="col-sm-2 col-sm-offset-1">
+                   
+                    <button nbButton status="danger" size="large" (click)="backtoprograms();">Back</button>
+                </div>
+              <div class="col-sm-7">
+                <button nbButton  type="submit" status="success" size="large" [disabled]="!MyForm.valid" >Update</button>
+               
+              </div>
+            </div> -->
+          </form>
+        </nb-card>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+
+
